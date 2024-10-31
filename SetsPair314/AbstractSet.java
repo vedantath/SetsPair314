@@ -1,19 +1,20 @@
 /*  Student information for assignment:
  *
- *  On <MY|OUR> honor, <NAME1> and <NAME2), 
- *  this programming assignment is <MY|OUR> own work
- *  and <I|WE> have not provided this code to any other student.
+ *  On OUR honor, Vedant Athale and Shruthik Alle,
+ *  this programming assignment is OUR own work
+ *  and WE have not provided this code to any other student.
  *
  *  Number of slip days used:
  *
  *  Student 1 (Student whose Canvas account is being used)
- *  UTEID:
- *  email address:
- *  TA name:
- *  
- *  Student 2 
- *  UTEID:
- *  email address:   
+ *  UTEID: vba252
+ *  email address: vedant.athale@gmail.com
+ *  Grader name:
+ *  Section number:
+ *
+ *  Student 2
+ *  UTEID: SA59576
+ *  email address: shruthik.alle@utexas.edu
  */
 
 import java.util.Iterator;

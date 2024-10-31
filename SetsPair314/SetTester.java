@@ -1,16 +1,20 @@
-
-/*
- * Student information for assignment:
+/*  Student information for assignment:
  *
- * Number of slip days used:
- * Student 1 (Student whose turnin account is being used)
- *  UTEID:
- *  email address:
+ *  On OUR honor, Vedant Athale and Shruthik Alle,
+ *  this programming assignment is OUR own work
+ *  and WE have not provided this code to any other student.
+ *
+ *  Number of slip days used:
+ *
+ *  Student 1 (Student whose turnin account is being used)
+ *  UTEID: vba252
+ *  email address: vedant.athale@gmail.com
  *  Grader name:
+ *  Section number:
  *
- * Student 2
- *  UTEID:
- *  email address:
+ *  Student 2
+ *  UTEID: SA59576
+ *  email address: shruthik.alle@utexas.edu
  */
 
 import java.io.File;

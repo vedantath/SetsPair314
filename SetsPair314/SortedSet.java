@@ -243,7 +243,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             return false;
         }
         // If otherSet is a SortedSet, compare elements one by one in order --> O(N)
-        if (otherSet instanceof SortedSet) {
+        if (otherSet instanceof SortedSet<?>) {
             SortedSet<E> o = (SortedSet<E>) otherSet;
             for (int i = 0; i < this.myCon.size(); i++) {
                 if (!this.myCon.get(i).equals(o.myCon.get(i))) {

@@ -23,9 +23,9 @@ import java.util.ArrayList;
 /**
  * In this implementation of the ISet interface the elements in the Set are
  * maintained in ascending order.
- *
+ * <p>
  * The data type for E must be a type that implements Comparable.
- *
+ * <p>
  * Implement methods that were not implemented in AbstractSet
  * and override methods that can be done more efficiently. An ArrayList must
  * be used as the internal storage container. For methods involving two set,
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     // Instance variable
-    private ArrayList<E> myCon;
+    private final ArrayList<E> myCon;
 
     /**
      * create an empty SortedSet
@@ -47,6 +47,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Create a copy of other that is sorted.<br>
      * Time Complexity: O(N log N)
+     *
      * @param other != null
      */
     public SortedSet(ISet<E> other) {
@@ -74,7 +75,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     // Merges the sorted sub-ArrayLists into a single sorted ArrayList --> O(N)
     private void merge(ArrayList<E> data, ArrayList<E> temp, int leftPos, int rightPos,
-                              int rightEnd) {
+                       int rightEnd) {
         int leftEnd = rightPos - 1;
         int tempPos = leftPos;
         int numElements = rightEnd - leftPos + 1;
@@ -83,8 +84,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             if (data.get(leftPos).compareTo(data.get(rightPos)) <= 0) {
                 temp.set(tempPos, data.get(leftPos));
                 leftPos++;
-            }
-            else {
+            } else {
                 temp.set(tempPos, data.get(rightPos));
                 rightPos++;
             }
@@ -131,6 +131,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Add an item to this set.
      * Time Complexity: O(N)
+     *
      * @param item the item to be added to this set. item != null.
      * @return true if this set changed as a result of this operation, false otherwise.
      */
@@ -152,6 +153,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Add all items of otherSet that are not already present in this set to this set.
      * Time Complexity: O(N) if the otherSet is a SortedSet, O(N^2) otherwise
+     *
      * @param otherSet != null
      * @return true if this set changed as a result of this operation, false otherwise.
      */
@@ -188,6 +190,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Determine if item is in this set.
      * Time Complexity: O(log N)
+     *
      * @param item element whose presence is being tested. item != null.
      * @return true if this set contains the specified item, false otherwise.
      */
@@ -199,6 +202,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
      * Determine if all of the elements of otherSet are in this set.
      * Time Complexity: O(N) if otherSet is a SortedSet, O(N^2) Worst case this set does contain
      * all the elements of the other set
+     *
      * @param otherSet != null
      * @return true if this set contains all the elements in otherSet, false otherwise.
      */
@@ -206,8 +210,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (otherSet == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
-        if (otherSet instanceof SortedSet) {
-            SortedSet<E> o = (SortedSet<E>) otherSet;
+        if (otherSet instanceof SortedSet<E> o) {
             int index = this.myCon.size() - 1;
             while (index >= 0 && o.size() > 0) {
                 if (myCon.get(index).compareTo(o.myCon.get(o.size() - 1)) == 0) {
@@ -224,6 +227,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
      * Determine if this set is equal to other. Two sets are equal if they have exactly the same
      * elements. The order of the elements does not matter.
      * Time Complexity: O(N) if other is a SortedSet, O(N^2) otherwise
+     *
      * @param other the object to compare to this set
      */
     public boolean equals(Object other) {
@@ -254,6 +258,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Create a new set that is the difference of this set and otherSet.
      * Time Complexity: O(N) if otherSet is a SortedSet
+     *
      * @param otherSet != null
      * @return a new set that is the difference of this set and otherSet.
      */
@@ -268,6 +273,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
      * Time Complexity: O(N) if otherSet is a SortedSet
+     *
      * @param otherSet != null
      * @return a new set that is the intersection of this set and otherSet.
      */
@@ -282,6 +288,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Create a new set that is the union of this set and otherSet. (elements in either set)
      * Time Complexity: O(N) if otherSet is a SortedSet, otherwise O(N log N)
+     *
      * @param otherSet != null
      * @return a new set that is the union of this set and otherSet.
      */
@@ -296,10 +303,9 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (otherSet instanceof SortedSet) {
             //merge(result.myCon, ((SortedSet<E>) otherSet).myCon, 0, 0, otherSet.size() - 1);
             //result.addAll(otherSet);
-        }
-        else {
+        } else {
             SortedSet<E> other = new SortedSet<E>(otherSet);
-           // merge(result.myCon, other.myCon, 0, 0, other.size() - 1);
+            // merge(result.myCon, other.myCon, 0, 0, other.size() - 1);
         }
         return result;
     }
@@ -320,6 +326,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Return the smallest element in this SortedSet.
      * <br> pre: size() != 0
+     *
      * @return the smallest element in this SortedSet.
      */
     public E min() {
@@ -332,6 +339,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Return the largest element in this SortedSet.
      * <br> pre: size() != 0
+     *
      * @return the largest element in this SortedSet.
      */
     public E max() {

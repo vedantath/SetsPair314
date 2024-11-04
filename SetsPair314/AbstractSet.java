@@ -20,33 +20,33 @@
 import java.util.Iterator;
 
 /**
- * Students are to complete this class. 
+ * Students are to complete this class.
  * Students should implement as many methods
- * as they can using the Iterator from the iterator 
- * method and the other methods. 
- *
+ * as they can using the Iterator from the iterator
+ * method and the other methods.
  */
 public abstract class AbstractSet<E> implements ISet<E> {
 
     /* DELETE THIS COMMENT FROM YOUR SUBMISSION.
-     * 
+     *
      * RECALL:
-     * 
+     *
      * NO INSTANCE VARIABLES ALLOWED.
-     * 
+     *
      * NO DIRECT REFERENCE TO UnsortedSet OR SortedSet ALLOWED.
      * (In other words the data types UnsortedSet and SortedSet
      * will not appear any where in this class.)
-     * 
+     *
      * NO DIRECT REFERENCES to ArrayList or other Java Collections.
-     * 
+     *
      * NO METHODS ADDED other than those in ISet and Object.
      */
-     
-      
+
+
     /**
-     * Return a String version of this set. 
+     * Return a String version of this set.
      * Format is (e1, e2, ... en)
+     *
      * @return A String version of this set.
      */
     public String toString() {
@@ -84,6 +84,7 @@ public abstract class AbstractSet<E> implements ISet<E> {
     /**
      * Determine if item is contained in this set.
      * Time Complexity: O(N)
+     *
      * @param item element whose presence is being tested. item != null
      * @return true if this set contains the specified item, false otherwise.
      */
@@ -103,6 +104,7 @@ public abstract class AbstractSet<E> implements ISet<E> {
     /**
      * Determine if all of the elements of otherSet are in this set.
      * Time Complexity: O(N^2)
+     *
      * @param otherSet != null
      * @return true if this set contains all the elements in otherSet, false otherwise.
      */
@@ -123,14 +125,14 @@ public abstract class AbstractSet<E> implements ISet<E> {
      * Determine if this set is equal to other. Two sets are equal if they have exactly the same
      * elements. The order of the elements does not matter.
      * Time Complexity: O(N^2) Worst Case: if the sets are equal
+     *
      * @param other the object to compare to this set
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof ISet)) {
+        if (!(other instanceof ISet<?> otherSet)) {
             return false;
         }
-        ISet<?> otherSet = (ISet<?>) other;
         if (this.size() != otherSet.size()) {
             return false;
         }
@@ -143,6 +145,7 @@ public abstract class AbstractSet<E> implements ISet<E> {
     /**
      * Remove the specified item from this set if it is present.
      * Time Complexity: O(N)
+     *
      * @param item the item to remove from the set. item != null.
      * @return true if this set changed as a result of this operation, false otherwise.
      */
@@ -177,6 +180,7 @@ public abstract class AbstractSet<E> implements ISet<E> {
     /**
      * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
      * Time Complexity: O(N^2)
+     *
      * @param otherSet != null
      * @return a new set that is the intersection of this set and otherSet.
      */

@@ -21,18 +21,17 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 /**
- * A simple implementation of an ISet. 
+ * A simple implementation of an ISet.
  * Elements are not in any particular order.
- * Students are to implement methods that 
+ * Students are to implement methods that
  * were not implemented in AbstractSet and override
- * methods that can be done more efficiently. 
+ * methods that can be done more efficiently.
  * An ArrayList must be used as the internal storage container.
- *
  */
 public class UnsortedSet<E> extends AbstractSet<E> {
 
     // Instance variable
-    private ArrayList<E> myCon;
+    private final ArrayList<E> myCon;
 
     // UnsortedSet Constructor: Creates an empty UnsortedSet
     public UnsortedSet() {
@@ -42,6 +41,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
     /**
      * Add an item to this set.
      * Time Complexity: O(N)
+     *
      * @param item the item to be added to this set. item != null.
      * @return true if this set changed as a result of this operation, false otherwise.
      */
@@ -59,6 +59,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
     /**
      * Add all items of otherSet that are not already present in this set to this set.
      * Time Complexity: O(N^2)
+     *
      * @param otherSet != null
      * @return true if this set changed as a result of this operation, false otherwise.
      */
@@ -79,6 +80,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
     /**
      * Create a new set that is the difference of this set and otherSet. (In this but not in other)
      * Time Complexity: O(N^2)
+     *
      * @param otherSet != null
      * @return a new set that is the difference of this set and otherSet.
      */
@@ -99,6 +101,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
     /**
      * Create a new set that is the union of this set and otherSet. (elements in either set)
      * Time Complexity: O(N^2)
+     *
      * @param otherSet != null
      * @return a new set that is the union of this set and otherSet.
      */
@@ -116,6 +119,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
     /**
      * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
      * Time Complexity: O(N^2)
+     *
      * @param otherSet != null
      * @return a new set that is the intersection of this set and otherSet.
      */

@@ -59,6 +59,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     }
 
     // Merge sort algorithm --> O(N log N)
+    // code for merge sort from class slides
     private void mergeSort() {
         ArrayList<E> temp = new ArrayList<E>();
         sort(myCon, temp, 0, myCon.size() - 1); //kick off the merge sort recursion
@@ -109,6 +110,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     }
 
     // Binary search algorithm --> O(log N)
+    // code for binary search from class slides
     private int binarySearch(ArrayList<E> data, E tgt) {
         int result = -1;
         int low = 0;

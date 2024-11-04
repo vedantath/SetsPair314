@@ -284,7 +284,18 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (otherSet == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
-        return null;
+        SortedSet<E> other;
+        if (!(otherSet instanceof SortedSet<?>)) {
+            other = new SortedSet<>(otherSet);  // O(N log N)
+        } else {
+            other = (SortedSet<E>) otherSet;
+        }
+
+        SortedSet<E> result = new SortedSet<>();
+
+        //fill result with modified merge algorithm, should be O(N)
+
+        return result;
     }
 
     /**

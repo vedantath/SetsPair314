@@ -128,8 +128,4 @@ public class UnsortedSet<E> extends AbstractSet<E> {
     public int size() {
         return myCon.size();
     }
-
-    public ISet<E> newSet() {
-        return new UnsortedSet<E>();
-    }
 }

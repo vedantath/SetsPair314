@@ -375,8 +375,6 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         return super.equals(otherSet); // otherSet not SortedSet, use AbstractSet equals -> O(N^2)
     }
 
-    //TODO: Implement difference !!!!!
-
     /**
      * Create a new set that is the difference of this set and otherSet.
      * Time Complexity: O(N) if otherSet is a SortedSet
@@ -396,9 +394,9 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             other = (SortedSet<E>) otherSet;
         }
 
-        //ISet<E> result = new SortedSet<>();
-        return differenceHelper(this, other);
-        //return result;
+        ISet<E> result = new SortedSet<>();
+        result = differenceHelper(this, other);
+        return result;
     }
 
     /**
@@ -485,10 +483,6 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             throw new IllegalStateException("size cannot be 0");
         }
         return myCon.get(size() - 1);
-    }
-
-    public ISet<E> newSet() {
-        return new SortedSet<E>();
     }
 
 }

@@ -145,40 +145,53 @@ public class SetTester {
         showTestResults(actual, false, 13, s1, s2, "containsAll method SortedSet"
                 + "/ns1 contains all of s2.");
 
-//        // test 14
-//        s3 = s2.difference(s1);
-//        expected = new SortedSet<>();
-//        expected.add("A");
-//        actual = s3.equals(expected);
-//        showTestResults(actual, true, 14, s1, s2, "difference and equals methods SortedSet"
-//                + "/ns2.difference(s1). result = " + s3 + " expected result = " + expected);
+//        ISet<String> bruh = new SortedSet<String>();
+//        bruh.add("A");
+//        bruh.add("B");
+//        bruh.add("C");
 //
-//        // test 15
-//        s3 = s1.difference(s2);
-//        expected = new SortedSet<>();
-//        actual = s3.equals(expected);
-//        showTestResults(actual, true, 14, s1, s2, "difference and equals methods SortedSet"
-//                + "/ns1.difference(s2). result = " + s3 + " expected result = " + expected);
+//        ISet<String> fuck314 = new SortedSet<String>();
+//        fuck314.add("B");
+//        fuck314.add("C");
+//        fuck314.add("D");
+//
+//        System.out.println("TEST!!!\t"+bruh.difference(fuck314).toString());
 
-        // test 16
-//        s3 = s1.union(s2);
-//        expected = new SortedSet<>();
-//        expected.add("A");
-//        expected.add("B");
-//        expected.add("C");
-//        actual = s3.equals(expected);
-//        showTestResults(actual, true, 16, s1, s2, "union and equals methods SortedSet"
-//                + "/ns2.union(s1). actual result = " + s3
-//                + " expected result = " + expected);
-//
-//
-//        // test 17
-//        s3 = s1.intersection(s2);
-//        expected.remove("A");
-//        actual = s3.equals(expected);
-//        showTestResults(actual, true, 17, s1, s2, "intersection and equals methods SortedSet"
-//                + "/ns1.intersection(s2). actual result = " + s3
-//                + " expected result = " + expected);
+        // test 14
+        System.out.println("s2: "+s2.toString()+"\ns1: "+s1.toString());
+        s3 = s2.difference(s1);
+        expected = new SortedSet<>();
+        expected.add("A");
+        actual = s3.equals(expected);
+        showTestResults(actual, true, 14, s1, s2, "difference and equals methods SortedSet"
+                + "/ns2.difference(s1). result = " + s3 + " expected result = " + expected);
+
+        // test 15
+        s3 = s1.difference(s2);
+        expected = new SortedSet<>();
+        actual = s3.equals(expected);
+        showTestResults(actual, true, 15, s1, s2, "difference and equals methods SortedSet"
+                + "/ns1.difference(s2). result = " + s3 + " expected result = " + expected);
+
+     //    test 16
+        s3 = s1.union(s2);
+        expected = new SortedSet<>();
+        expected.add("A");
+        expected.add("B");
+        expected.add("C");
+        actual = s3.equals(expected);
+        showTestResults(actual, true, 16, s1, s2, "union and equals methods SortedSet"
+                + "/ns2.union(s1). actual result = " + s3
+                + " expected result = " + expected);
+
+
+        // test 17
+        s3 = s1.intersection(s2);
+        expected.remove("A");
+        actual = s3.equals(expected);
+        showTestResults(actual, true, 17, s1, s2, "intersection and equals methods SortedSet"
+                + "/ns1.intersection(s2). actual result = " + s3
+                + " expected result = " + expected);
 
         // test 18
         s1.add("A");

@@ -190,10 +190,9 @@ public abstract class AbstractSet<E> implements ISet<E> {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
         ISet<E> result = otherSet;
-        result.clear();
         for (E val : this) {
-            if (otherSet.contains(val)) {
-                result.add(val);
+            if (!otherSet.contains(val)) {
+                result.remove(val);
             }
         }
         return result;

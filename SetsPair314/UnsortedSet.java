@@ -116,27 +116,6 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return result;
     }
 
-    /**
-     * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
-     * Time Complexity: O(N^2)
-     *
-     * @param otherSet != null
-     * @return a new set that is the intersection of this set and otherSet.
-     */
-    @Override
-    public ISet<E> intersection(ISet<E> otherSet) {
-        if (otherSet == null) {
-            throw new IllegalArgumentException("otherSet cannot be null");
-        }
-        ISet<E> result = new UnsortedSet<E>();
-        for (E val : myCon) {
-            if (otherSet.contains(val)) {
-                result.add(val);
-            }
-        }
-        return result;
-    }
-
     /* Return an Iterator object for the elements of this set.
        Time Complexity: O(1) */
     @Override
@@ -148,5 +127,9 @@ public class UnsortedSet<E> extends AbstractSet<E> {
        Time Complexity: O(1) */
     public int size() {
         return myCon.size();
+    }
+
+    public ISet<E> newSet() {
+        return new UnsortedSet<E>();
     }
 }

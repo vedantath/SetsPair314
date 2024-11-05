@@ -109,6 +109,125 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         }
     }
 
+    /**
+     * Merge two sub-SortedSets into a single sorted set.
+     * @param set1 the first sorted set to be merged
+     * @param set2 the second sorted set to be merged
+     * @return a new ISet that contains all the elements of set1 and set2 and sorted
+     */
+    private ISet<E> mergeSets(SortedSet<E> set1, SortedSet<E> set2) {
+        ArrayList<E> data = set1.myCon;
+        ArrayList<E> temp = set2.myCon;
+        ArrayList<E> result = new ArrayList<>();
+        int leftPos = 0;
+        int rightPos = 0;
+
+        //main loop
+        while (leftPos < data.size() && rightPos < temp.size()) {
+            // if element in data is less than or equal to element in temp, add to result
+            if (data.get(leftPos).compareTo(temp.get(rightPos)) <= 0) {
+                result.add(data.get(leftPos));
+                leftPos++; //increment left index
+            }
+            //element in temp is less than element in data, add to result, increment right index
+            else {
+                result.add(temp.get(rightPos));
+                rightPos++;
+            }
+        }
+        // copy remaining elements from data and temp into result
+        while (leftPos < data.size()) {
+            result.add(data.get(leftPos));
+            leftPos++;
+        }
+
+        while (rightPos < temp.size()) {
+            result.add(temp.get(rightPos));
+            rightPos++;
+        }
+        // copy result into resultSet internal container
+        ISet<E> resultSet = new SortedSet<>();
+        for (E item : result) {
+            resultSet.add(item);
+        }
+        return resultSet;
+    }
+
+    /**
+     * Create a new set that is the intersection of setA and setB.
+     * @param setA the first sorted set to be intersected
+     * @param setB the second sorted set to be intersected
+     * @return a new ISet that contains all the elements that are in both setA and setB
+     */
+    private ISet<E> intersectionHelper(SortedSet<E> setA, SortedSet<E> setB) {
+        ArrayList<E> res = new ArrayList<>();
+        ArrayList<E> aList = setA.myCon;
+        ArrayList<E> bList = setB.myCon;
+        int left = 0; //left pointer index
+        int right = 0; //right pointer index
+        //main loop
+        while (left < aList.size() && right < bList.size()) {
+            // If elements are equal, add to result and increment both pointers
+            if (aList.get(left).compareTo(bList.get(right)) == 0) {
+                res.add(aList.get(left));
+                left++;
+                right++;
+            } else if (aList.get(left).compareTo(bList.get(right)) < 0) { //
+                left++;
+            } else {
+                right++;
+            }
+        }
+        // copy result into resultSet internal container
+        ISet<E> resultSet = new SortedSet<>();
+        for (E item : res) {
+            resultSet.add(item);
+        }
+        return resultSet;
+    }
+
+    /**
+     * Create a new set that is the difference of setA and setB. A-B (elements in A, but not in B)
+     * @param setA
+     * @param setB
+     * @return a new ISet that contains all the elements that are in setA but not in setB
+     */
+    private ISet<E> differenceHelper(SortedSet<E> setA, SortedSet<E> setB) {
+        ArrayList<E> res = new ArrayList<>();
+        ArrayList<E> aList = setA.myCon;
+        ArrayList<E> bList = setB.myCon;
+        int left = 0; //left pointer index
+        int right = 0; //right pointer index
+        //main loop
+        while (left < aList.size() && right < bList.size()) {
+            // If elements are equal, skip over and increment both index pointers
+            if (aList.get(left).compareTo(bList.get(right)) == 0) {
+                left++;
+                right++;
+            }
+            // If element in aList is less than element in bList, add to result and increment left
+            else if (aList.get(left).compareTo(bList.get(right)) < 0) {
+                res.add(aList.get(left));
+                left++;
+            }
+            // Element in bList smaller, increment right index
+            else {
+                right++;
+            }
+        }
+        // copy remaining elements from aList into result (elements not in bList)
+        while (left < aList.size()) {
+            res.add(aList.get(left));
+            left++;
+        }
+        // copy result into resultSet internal container
+        ISet<E> resultSet = new SortedSet<>();
+        for (E item : res) {
+            resultSet.add(item);
+        }
+        return resultSet;
+    }
+
     // Binary search algorithm --> O(log N)
     // code for binary search from class slides
     private int binarySearch(ArrayList<E> data, E tgt) {
@@ -169,11 +288,12 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             if (!this.equals(otherSet)) {
                 setChanged = true;
             }
+            SortedSet<E> other = (SortedSet<E>) otherSet;
             if (otherSet.size() > 0) {
                 //merge(this.myCon, ((SortedSet<E>) otherSet).myCon, 0, 0, otherSet.size() - 1);
                 //TODO: fix IndexOutOfBoundsException when calling merge here
-                merge(this.myCon, ((SortedSet<E>) otherSet).myCon, 0, this.myCon.size(),
-                        otherSet.size());
+                //merge(this.myCon, ((SortedSet<E>) otherSet).myCon, 0, this.myCon.size(),
+                  //      otherSet.size());
             }
         }
         // If otherSet is not SortedSet, add elements one by one then perform mergeSort --> O(N^2)
@@ -255,7 +375,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         return super.equals(otherSet); // otherSet not SortedSet, use AbstractSet equals -> O(N^2)
     }
 
-    //TODO: Implement difference, intersection, union !!!!!
+    //TODO: Implement difference !!!!!
 
     /**
      * Create a new set that is the difference of this set and otherSet.
@@ -269,7 +389,16 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (otherSet == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
-        return null;
+        SortedSet<E> other;
+        if (!(otherSet instanceof SortedSet<?>)) {
+            other = new SortedSet<>(otherSet);  // O(N log N)
+        } else {
+            other = (SortedSet<E>) otherSet;
+        }
+
+        //ISet<E> result = new SortedSet<>();
+        return differenceHelper(this, other);
+        //return result;
     }
 
     /**
@@ -291,10 +420,8 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             other = (SortedSet<E>) otherSet;
         }
 
-        SortedSet<E> result = new SortedSet<>();
-
-        //fill result with modified merge algorithm, should be O(N)
-
+        ISet<E> result = new SortedSet<>();
+        result = intersectionHelper(this, other);
         return result;
     }
 
@@ -307,19 +434,17 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
      */
     @Override
     public ISet<E> union(ISet<E> otherSet) {
-        //TODO: fix IndexOutOfBoundsException when calling merge in this method
         if (otherSet == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
-        SortedSet<E> result = new SortedSet<E>();
-        //result.addAll(this);
-        if (otherSet instanceof SortedSet) {
-            //merge(result.myCon, ((SortedSet<E>) otherSet).myCon, 0, 0, otherSet.size() - 1);
-            //result.addAll(otherSet);
+        SortedSet<E> other;
+        if (!(otherSet instanceof SortedSet<?>)) {
+            other = new SortedSet<>(otherSet);  // O(N log N)
         } else {
-            SortedSet<E> other = new SortedSet<E>(otherSet);
-            // merge(result.myCon, other.myCon, 0, 0, other.size() - 1);
+            other = (SortedSet<E>) otherSet;
         }
+        ISet<E> result = new SortedSet<>();
+        result = mergeSets(this, (SortedSet<E>) otherSet);
         return result;
     }
 
@@ -360,6 +485,10 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             throw new IllegalStateException("size cannot be 0");
         }
         return myCon.get(size() - 1);
+    }
+
+    public ISet<E> newSet() {
+        return new SortedSet<E>();
     }
 
 }

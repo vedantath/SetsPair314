@@ -43,220 +43,283 @@ public class SetTester {
 
     public static void main(String[] args) {
 
-        ISet<String> s1 = new UnsortedSet<>();
-        s1.add("A");
-        s1.add("C");
-        s1.add("A");
-        s1.add("B");
+        //AbstractSet methods test cases
+        AbstractSet<Integer> absSet1 = new UnsortedSet<>();
+        AbstractSet<Integer> absSet2 = new UnsortedSet<>();
 
-        // test 1
-        boolean actual = s1.contains("A");
-        showTestResults(actual, true, 1, s1, null, "add and contains methods UnsortedSet"
-                + "/nset 1 contains A.");
+        absSet1.add(1);
+        absSet1.add(2);
+        absSet1.add(3);
+        absSet1.add(4);
 
-        // test 2
-        s1.remove("A");
-        actual = s1.contains("A");
-        showTestResults(actual, false, 2, s1, null, "remove and contains method UnsortedSet"
-                + "/nset1 does not contain A.");
-
-        // test 3
-        actual = s1.size() == 2;
-        showTestResults(actual, true, 3, s1, null, "size method UnsortedSet"
-                + "/nsize of set 1 is 2.");
-
-        ISet<String> s2 = new UnsortedSet<>();
-        s2.add("C");
-        s2.add("A");
-        s2.add("B");
-
-        // test 4
-        actual = s2.containsAll(s1);
-        showTestResults(actual, true, 4, s1, s2, "containsAll method UnsortedSet"
-                + "/ns2 contains all of s1.");
-
-        // test 5
-        actual = s1.containsAll(s2);
-        showTestResults(actual, false, 5, s1, s2, "containsAll method UnsortedSet"
-                + "/ns1 contains all of s2.");
-
-        // test 6
-        ISet<String> s3 = s2.difference(s1);
-        ISet<String> expected = new UnsortedSet<>();
-        expected.add("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 6, s1, s2, "difference and equals methods UnsortedSet"
-                + "/ns2.difference(s1). result = " + s3 + " expected result = " + expected);
-
-        // test 7
-        s3 = s2.union(s1);
-        expected.add("B");
-        expected.add("C");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 7, s1, s2, "union and equals methods UnsortedSet"
-                + "/ns2.union(s1). actual result = " + s3
-                + " expected result = " + expected);
-
-        // test 8
-        //System.out.println("s2: "+s2.toString()+"\ns1: "+s1.toString());
-        s3 = s2.intersection(s1);
-        expected.remove("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 8, s1, s2, "intersection and equals methods UnsortedSet"
-                + "/ns2.intersection(s1). actual result = " + s3
-                + " expected result = " + expected);
-
-        // sorted sets
-        s1 = new SortedSet<>();
-        s1.add("A");
-        s1.add("C");
-        s1.add("A");
-        s1.add("B");
-
-        // test 9
-        actual = s1.contains("A");
-        showTestResults(actual, true, 9, s1, null, "add and contains methods SortedSet"
-                + "/nset 1 contains A.");
-
-        // test 10
-        s1.remove("A");
-        actual = s1.contains("A");
-        showTestResults(actual, false, 10, s1, null, "remove and contains method SortedSet"
-                + "/nset1 does not contain A.");
-
-
-        // test 11
-        actual = s1.size() == 2;
-        showTestResults(actual, true, 11, s1, null, "size method SortedSet"
-                + "/nsize of set 1 is 2.");
-
-        s2 = new SortedSet<>();
-        s2.add("C");
-        s2.add("A");
-        s2.add("B");
-
-        // test 12
-        actual = s2.containsAll(s1);
-        showTestResults(actual, true, 12, s1, s2, "containsAll method SortedSet"
-                + "/ns2 contains all of s1.");
-
-        // test 13
-        actual = s1.containsAll(s2);
-        showTestResults(actual, false, 13, s1, s2, "containsAll method SortedSet"
-                + "/ns1 contains all of s2.");
-
-//        ISet<String> bruh = new SortedSet<String>();
-//        bruh.add("A");
-//        bruh.add("B");
-//        bruh.add("C");
-//
-//        ISet<String> fuck314 = new SortedSet<String>();
-//        fuck314.add("B");
-//        fuck314.add("C");
-//        fuck314.add("D");
-//
-//        System.out.println("TEST!!!\t"+bruh.difference(fuck314).toString());
-
-        // test 14
-        System.out.println("s2: "+s2.toString()+"\ns1: "+s1.toString());
-        s3 = s2.difference(s1);
-        expected = new SortedSet<>();
-        expected.add("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 14, s1, s2, "difference and equals methods SortedSet"
-                + "/ns2.difference(s1). result = " + s3 + " expected result = " + expected);
-
-        // test 15
-        s3 = s1.difference(s2);
-        expected = new SortedSet<>();
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 15, s1, s2, "difference and equals methods SortedSet"
-                + "/ns1.difference(s2). result = " + s3 + " expected result = " + expected);
-
-     //    test 16
-        s3 = s1.union(s2);
-        expected = new SortedSet<>();
-        expected.add("A");
-        expected.add("B");
-        expected.add("C");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 16, s1, s2, "union and equals methods SortedSet"
-                + "/ns2.union(s1). actual result = " + s3
-                + " expected result = " + expected);
-
-
-        // test 17
-        System.out.println("s1: "+s1.toString()+"\ns2: "+s2.toString());
-        s3 = s1.intersection(s2);
-        expected.remove("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 17, s1, s2, "intersection and equals methods SortedSet"
-                + "/ns1.intersection(s2). actual result = " + s3
-                + " expected result = " + expected);
-
-        // test 18
-        s1.add("A");
-        Iterator<String> it1 = s1.iterator();
-        Iterator<String> it2 = s2.iterator();
-        boolean good = true;
-        while (good && it1.hasNext()) {
-            good = it1.next().equals(it2.next());
+        // AbstractSet contains
+        boolean expected = false;
+        boolean actual = absSet1.contains(-5);
+        if (actual == expected) {
+            System.out.println("Passed test 1: AbstractSet contains");
+        } else {
+            System.out.println("Failed test 1: AbstractSet contains\tExpected: " + expected + "\tActual: " + actual);
         }
-        showTestResults(good, true, 18, s1, s2, "iterator and add methods SortedSet."
-                + "\nChecked all elements equal via iterators.");
 
-        // test 19
-        s1 = new UnsortedSet<>();
-        UnsortedSet<Integer> si1 = new UnsortedSet<>();
-        actual = si1.equals(s1);
-        showTestResults(actual, true, 19, s1, s2, "equals methods UnsortedSet"
-                + "\ns2.equals(s1), both sets empty");
+        expected = true;
+        actual = absSet1.contains(3);
+        if (actual == expected) {
+            System.out.println("Passed test 2: AbstractSet contains");
+        } else {
+            System.out.println("Failed test 2: AbstractSet contains\tExpected: " + expected + "\tActual: " + actual);
+        }
 
-        // test 20
-        s1.add("is");
-        s1.add("a");
-        si1.add(12);
-        si1.add(13);
-        si1.add(12);
-        actual = si1.equals(s1);
-        showTestResults(actual, false, 20, si1, null, "equals methods UnsortedSet"
-                + "\ns2.equals(s1), different data types of elements");
+        // AbstractSet containsAll
+        absSet2.add(4);
+        absSet2.add(2);
+        absSet2.add(3);
+        expected = true;
+        actual = absSet1.containsAll(absSet2);
+        if (actual == expected) {
+            System.out.println("Passed test 3: AbstractSet containsAll");
+        } else {
+            System.out.println("Failed test 3: AbstractSet containsAll\tExpected: " + expected + "\tActual: " + actual);
+        }
 
-        // test 21
-        ArrayList<Integer> ar = new ArrayList<>();
-        ar.add(12);
-        ar.add(13);
-        actual = si1.equals(ar);
-        showTestResults(actual, false, 21, si1, null, "equals methods UnsortedSet"
-                + "\nsi1.equals(anArrayList), other Object is not a set");
+        absSet2.add(10);
+        expected = false;
+        actual = absSet1.containsAll(absSet2);
+        if (actual == expected) {
+            System.out.println("Passed test 4: AbstractSet containsAll");
+        } else {
+            System.out.println("Failed test 4: AbstractSet containsAll\tExpected: " + expected + "\tActual: " + actual);
+        }
 
-        // test 22
-        Object obj1 = s1;
-        s2 = new UnsortedSet<>();
-        s2.add("a");
-        s2.add("is");
-        Object obj2 = s2;
-        actual = obj1.equals(obj2);
-        showTestResults(actual, true, 22, s1, s2, "equals methods UnsortedSet"
-                + "\nVerify equals overridden and not overloaded.");
+        // AbstractSet equals
+        expected = false;
+        actual = absSet1.equals(absSet2);
+        if (actual == expected) {
+            System.out.println("Passed test 5: AbstractSet equals");
+        } else {
+            System.out.println("Failed test 5: AbstractSet equals\tExpected: " + expected + "\tActual: " + actual);
+        }
 
-        // test 23
-        s1 = new SortedSet<>();
-        s1.add("A");
-        s1.add("A");
-        s1.add("B");
-        ISet<Integer> ss2 = new SortedSet<>();
-        ss2.add(12);
-        ss2.add(15);
-        ss2.add(12);
-        ss2.add(15);
-        actual = s1.equals(ss2);
-        showTestResults(actual, false, 23, s1, null, "equals methods SortedSet - different types"
-                + "\nsecond set contains Integers: " + ss2);
+        AbstractSet<Integer> absSet3 = new UnsortedSet<>();
+        absSet3.add(1);
+        absSet3.add(2);
+        absSet3.add(3);
+        absSet3.add(4);
+        expected = true;
+        actual = absSet1.equals(absSet3);
+        if (actual == expected) {
+            System.out.println("Passed test 6: AbstractSet equals");
+        } else {
+            System.out.println("Failed test 6: AbstractSet equals\tExpected: " + expected + "\tActual: " + actual);
+        }
 
-        // test 24
-        actual = s1.equals(null);
-        showTestResults(actual, false, 24, s1, null, "equals methods SortedSet - other Object is null");
+        // AbstractSet remove
+        expected = true;
+        int removeNum = 3;
+        actual = absSet1.remove(removeNum);
+        if (actual == expected) {
+            System.out.println("Passed test 7: AbstractSet remove\t"+absSet3.toString()+"  remove" +
+                    " "+removeNum+" --> "+absSet1.toString());
+        } else {
+            System.out.println("Failed test 7: AbstractSet remove\tExpected: " + expected + "\tActual: " + actual);
+            System.out.println(absSet3.toString()+"  remove "+removeNum+" --> "+absSet1.toString());
+        }
+
+        expected = false;
+        removeNum = 20;
+        actual = absSet1.remove(removeNum);
+        if (actual == expected) {
+            System.out.println("Passed test 8: AbstractSet remove when element not present");
+        } else {
+            System.out.println("Failed test 8: AbstractSet remove\tExpected: " + expected + "\tActual: " + actual);
+        }
+
+        // AbstractSet clear
+        absSet1.clear();
+        if (absSet1.toString().equals("()")) {
+            System.out.println("Passed test 9: AbstractSet clear");
+        } else {
+            System.out.println("Failed test 9: AbstractSet clear\tExpected: ()\tActual: " + absSet1.toString());
+        }
+
+        // AbstractSet size
+        if (absSet1.size() == 0) {
+            System.out.println("Passed test 10: AbstractSet size");
+        } else {
+            System.out.println("Failed test 10: AbstractSet size\tExpected: 0\tActual: " + absSet1.size());
+        }
+
+        if (absSet3.size() == 4) {
+            System.out.println("Passed test 11: AbstractSet size");
+        } else {
+            System.out.println("Failed test 11: AbstractSet size\tExpected: 4\tActual: " + absSet3.size());
+        }
+
+        // AbstractSet toString
+        if (absSet3.toString().equals("(1, 2, 3, 4)")) {
+            System.out.println("Passed test 12: AbstractSet toString");
+        } else {
+            System.out.println("Failed test 12: AbstractSet toString\tExpected: (1, 2, 3, 4)\tActual: " + absSet3.toString());
+        }
+
+        //AbstractSet union
+        System.out.println("absSet1: "+absSet1.toString()+"\nabsSet3: "+absSet3.toString());
+        AbstractSet<Integer> expectedRes = (AbstractSet<Integer>) absSet1.union(absSet3);
+        if (expectedRes.toString().equals("(1, 2, 3, 4)")) {
+            System.out.println("Passed test 13: AbstractSet union");
+        } else {
+            System.out.println("Failed test 13: AbstractSet union\tExpected: ()\tActual: " + expectedRes.toString());
+        }
+
+        absSet1.add(1);
+        absSet1.add(3);
+        absSet1.add(5);
+        absSet1.add(7);
+        System.out.println("absSet1: "+absSet1.toString()+"\nabsSet3: "+absSet3.toString());
+        expectedRes = (AbstractSet<Integer>) absSet1.union(absSet3);
+        if (expectedRes.toString().equals("(1, 2, 3, 4, 5, 7)")) {
+            System.out.println("Passed test 14: AbstractSet union");
+        } else {
+            System.out.println("Failed test 14: AbstractSet union\tExpected: (1, 3)\tActual: " + expectedRes.toString());
+        }
+
+        System.out.println("-----------------------------------------------------");
+
+        //UnsortedSet methods test cases
+        ISet<Integer> unsortedSet1 = new UnsortedSet<>();
+        ISet<Integer> unsortedSet2 = new UnsortedSet<>();
+        //UnsortedSet add
+        unsortedSet1.add(1);
+        if (unsortedSet1.contains(1)) {
+            System.out.println("Passed test 15: UnsortedSet add");
+        } else {
+            System.out.println("Failed test 15: UnsortedSet add\tExpected: true\tActual: " + unsortedSet1.contains(1));
+        }
+
+        unsortedSet2.add(2);
+        unsortedSet2.add(3);
+
+        //UnsortedSet addAll
+        unsortedSet1.addAll(unsortedSet2);
+        ISet<Integer> unsortedExpected = new UnsortedSet<>();
+        unsortedExpected.add(1);
+        unsortedExpected.add(2);
+        unsortedExpected.add(3);
+        if (unsortedExpected.equals(unsortedSet1)) {
+            System.out.println("Passed test 16: UnsortedSet addAll");
+        } else {
+            System.out.println("Failed test 16: UnsortedSet addAll\tExpected: (1, 2, 3)\tActual: " + unsortedSet1.toString());
+        }
+
+        //UnsortedSet size
+        if (unsortedSet1.size() == 3) {
+            System.out.println("Passed test 17: UnsortedSet size");
+        } else {
+            System.out.println("Failed test 17: UnsortedSet size\tExpected: 3\tActual: " + unsortedSet1.size());
+        }
+
+        //UnsortedSet intersection
+        unsortedSet1.clear();
+        unsortedSet2.clear();
+        unsortedSet1.add(0);
+        unsortedSet1.add(1);
+        unsortedSet1.add(2);
+        unsortedSet1.add(3);
+        unsortedSet2.add(-3);
+        unsortedSet2.add(0);
+        unsortedSet2.add(3);
+        unsortedSet2.add(6);
+        expectedRes.clear();
+        expectedRes.add(0);
+        expectedRes.add(3);
+        if (expectedRes.equals(unsortedSet1.intersection(unsortedSet2))) {
+            System.out.println("Passed test 18: UnsortedSet intersection");
+        } else {
+            System.out.println("Failed test 18: UnsortedSet intersection\tExpected: (0, 3)\tActual: " + unsortedSet1.intersection(unsortedSet2).toString());
+        }
+
+        //UnsortedSet difference --> (0,1,2,3) - (-3,0,3,6) = (1,2)
+        expectedRes.clear();
+        expectedRes.add(1);
+        expectedRes.add(2);
+        if (expectedRes.equals(unsortedSet1.difference(unsortedSet2))) {
+            System.out.println("Passed test 19: UnsortedSet difference");
+        } else {
+            System.out.println("Failed test 19: UnsortedSet difference\tExpected: (1, 2)\tActual: " + unsortedSet1.difference(unsortedSet2).toString());
+        }
+
+        //UnsortedSet iterator
+        Iterator<Integer> it = unsortedSet1.iterator();
+        ArrayList<Integer> list = new ArrayList<>();
+        while(it.hasNext()) {
+            list.add(it.next());
+        }
+        if (list.toString().equals("[0, 1, 2, 3]")) {
+            System.out.println("Passed test 20: UnsortedSet iterator");
+        } else {
+            System.out.println("Failed test 20: UnsortedSet iterator\tExpected: [0, 1, 2, 3]\tActual: " + list.toString());
+        }
+
+        //SortedSet methods
+        ISet<String> sortedSet1 = new SortedSet<>();
+        ISet<String> sortedSet2 = new SortedSet<>();
+        //sorted set copy constructor
+        sortedSet1.add("A");
+        sortedSet1.add("B");
+        sortedSet1.add("C");
+        ISet<String> sortedSet3 = new SortedSet<String>(sortedSet1);
+        if (sortedSet1.equals(sortedSet3)) {
+            System.out.println("Passed test 21: SortedSet copy constructor");
+        } else {
+            System.out.println("Failed test 21: SortedSet copy constructor\tExpected: (A, B, C)\tActual: " + sortedSet3.toString());
+        }
+
+       // SortedSet add
+        sortedSet1.add("D");
+        if (sortedSet1.toString().equals("(A, B, C, D)")) {
+            System.out.println("Passed test 22: SortedSet add");
+        } else {
+            System.out.println("Failed test 22: SortedSet add\tExpected: true\tActual: " + sortedSet1.toString());
+        }
+
+        //SortedSet addAll
+        sortedSet2.add("E");
+        sortedSet2.add("F");
+        sortedSet1.addAll(sortedSet2);
+        if (sortedSet1.toString().equals("(A, B, C, D, E, F)")) {
+            System.out.println("Passed test 23: SortedSet addAll");
+        } else {
+            System.out.println("Failed test 23: SortedSet addAll\tExpected: (A, B, C, D, E, F)\tActual: " + sortedSet1.toString());
+        }
+
+
+
+
+
+
+//        unsortedSet1.add(2);
+//        unsortedSet1.add(3);
+//
+//        unsortedSet2.add(3);
+//        unsortedSet2.add(4);
+//        unsortedSet2.add(5);
+//        ISet<Integer> unsortedRes = new UnsortedSet<>();
+//        unsortedRes.add(1);
+//        unsortedRes.add(2);
+//        unsortedRes.add(3);
+//        unsortedRes.add(4);
+//        unsortedRes.add(5);
+//        if (unsortedRes.equals(unsortedSet1.union(unsortedSet2))) {
+//            System.out.println("Passed test 16: UnsortedSet union");
+//        } else {
+//            System.out.println("Failed test 16: UnsortedSet union\tExpected: (1, 2, 3, 4)" +
+//                    "\tActual: " + unsortedSet1.union(unsortedSet2).toString());
+//        }
+
+
+
+
+
+
 
         // CS314 Students. Uncomment this section when ready to
         // run your experiments

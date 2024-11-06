@@ -177,24 +177,34 @@ public abstract class AbstractSet<E> implements ISet<E> {
         return count;
     }
 
-    /**
-     * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
-     * Time Complexity: O(N^2)
-     *
-     * @param otherSet != null
-     * @return a new set that is the intersection of this set and otherSet.
-     */
-    @Override
-    public ISet<E> intersection(ISet<E> otherSet) {
-        if (otherSet == null) {
+//    /**
+//     * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
+//     * Time Complexity: O(N^2)
+//     *
+//     * @param otherSet != null
+//     * @return a new set that is the intersection of this set and otherSet.
+//     */
+//    @Override
+//    public ISet<E> intersection(ISet<E> otherSet) {
+//        if (otherSet == null) {
+//            throw new IllegalArgumentException("otherSet cannot be null");
+//        }
+//        for (E val : this) {
+//            if (!otherSet.contains(val)) {
+//                this.remove(val);
+//            }
+//        }
+//        return this;
+//    }
+    public ISet<E> union(ISet<E> other) {
+        if (other == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
-        ISet<E> result = otherSet;
         for (E val : this) {
-            if (!otherSet.contains(val)) {
-                result.remove(val);
+            if (!other.contains(val)) {
+                other.add(val);
             }
         }
-        return result;
+        return other;
     }
 }

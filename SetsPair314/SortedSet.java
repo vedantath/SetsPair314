@@ -55,14 +55,19 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         for (E item : other) {
             this.add(item);
         }
-        this.mergeSort();
+        mergeSort(myCon);
     }
 
     // Merge sort algorithm --> O(N log N)
     // code for merge sort from class slides
-    private void mergeSort() {
-        ArrayList<E> temp = new ArrayList<E>();
-        sort(myCon, temp, 0, myCon.size() - 1); //kick off the merge sort recursion
+    private void mergeSort(ArrayList<E> data) {
+        if (data.size() > 1 && data != null) {
+            ArrayList<E> temp = new ArrayList<E>(data.size());
+            for (int i = 0; i < data.size(); i++) {
+                temp.add(null); // Add null placeholders to match size
+            }
+            sort(data, temp, 0, data.size() - 1); //kick off the merge sort recursion
+        }
     }
 
     private void sort(ArrayList<E> data, ArrayList<E> temp, int low, int high) {
@@ -290,10 +295,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             }
             SortedSet<E> other = (SortedSet<E>) otherSet;
             if (otherSet.size() > 0) {
-                //merge(this.myCon, ((SortedSet<E>) otherSet).myCon, 0, 0, otherSet.size() - 1);
-                //TODO: fix IndexOutOfBoundsException when calling merge here
-                //merge(this.myCon, ((SortedSet<E>) otherSet).myCon, 0, this.myCon.size(),
-                  //      otherSet.size());
+                merge(this.myCon, other.myCon, 0, 0, other.size() - 1);
             }
         }
         // If otherSet is not SortedSet, add elements one by one then perform mergeSort --> O(N^2)
@@ -304,7 +306,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
                     setChanged = true;
                 }
             }
-            this.mergeSort();
+            mergeSort(myCon);
         }
         return setChanged;
     }

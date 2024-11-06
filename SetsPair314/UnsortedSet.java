@@ -98,21 +98,36 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return result;
     }
 
-    /**
-     * Create a new set that is the union of this set and otherSet. (elements in either set)
-     * Time Complexity: O(N^2)
-     *
-     * @param otherSet != null
-     * @return a new set that is the union of this set and otherSet.
-     */
-    @Override
-    public ISet<E> union(ISet<E> otherSet) {
+//    /**
+//     * Create a new set that is the union of this set and otherSet. (elements in either set)
+//     * Time Complexity: O(N^2)
+//     *
+//     * @param otherSet != null
+//     * @return a new set that is the union of this set and otherSet.
+//     */
+//    @Override
+//    public ISet<E> union(ISet<E> otherSet) {
+//        if (otherSet == null) {
+//            throw new IllegalArgumentException("otherSet cannot be null");
+//        }
+//        ISet<E> result = new UnsortedSet<E>();
+//        result.addAll(this);
+//        result.addAll(otherSet);
+//        return result;
+//    }
+
+
+    //TEMP
+    public ISet<E> intersection(ISet<E> otherSet) {
         if (otherSet == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
         ISet<E> result = new UnsortedSet<E>();
-        result.addAll(this);
-        result.addAll(otherSet);
+        for (E val : myCon) {
+            if (otherSet.contains(val)) {
+                result.add(val);
+            }
+        }
         return result;
     }
 

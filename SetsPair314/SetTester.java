@@ -1,6 +1,6 @@
 /*  Student information for assignment:
  *
- *  On OUR honor, Vedant Athale and Shruthik Alle,
+ *  On OUR honor, Vedant Athale and Srishruthik Alle,
  *  this programming assignment is OUR own work
  *  and WE have not provided this code to any other student.
  *
@@ -31,12 +31,62 @@ import javax.swing.*;
 
 /*
  * CS 314 Students, put your results to the experiments and answers to questions
- * here: CS314 Students, why is it unwise to implement all three of the
+ * here:
+ *
+ *
+ *
+1. Sorted Set
+  File       Size (KB)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time (s)   Inc. Prev. Row
+  Text2.txt  114         14,480        -                6,733          -                0.3513            -
+  Text3.txt  535         92,759        3.7x             16,705         2.5x             4.6249            13.2x
+  Text4.txt  538         93,311        1.0x             15,850         0.9x             4.0304            0.87x
+  Text1.txt  924         159,776       1.7x             25,685         1.6x             11.2986           2.8x
+
+2. Unsorted Set
+  File       Size (KB)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time (s)   Inc. Prev. Row
+  Text2.txt  114         14,480        -                6,733          -                0.1763            -
+  Text3.txt  535         92,759        3.7x             16,705         2.5x             1.8265            10.4x
+  Text4.txt  538         93,311        1.0x             15,850         0.9x             1.0659            0.58x
+  Text1.txt  924         159,776       1.7x             25,685         1.6x             3.6698            3.4x
+
+3. Java HashSet
+  File       Size (KB)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time (s)   Inc. Prev. Row
+  Text2.txt  114         14,480        -                6,733          -                0.0132            -
+  Text3.txt  535         92,759        3.7x             16,705         2.5x             0.0440            3.3x
+  Text4.txt  538         93,311        1.0x             15,850         0.9x             0.0387            0.88x
+  Text1.txt  924         159,776       1.7x             25,685         1.6x             0.0925            2.4x
+
+4. Java TreeSet
+  File       Size (KB)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time (s)   Inc. Prev. Row
+  Text2.txt  114         14,480        -                6,733          -                0.0135            -
+  Text3.txt  535         92,759        3.7x             16,705         2.5x             0.0626            4.6x
+  Text4.txt  538         93,311        1.0x             15,850         0.9x             0.0520            0.83x
+  Text1.txt  924         159,776       1.7x             25,685         1.6x             0.1039            2.0x
+
+ *
+ *
+ * 1) Tree Set and Sorted set is O(NlogM) because each inserition is O(log M) to maintain the sorted order
+HashSet and UnsortedSet: O(N) on average and each insertion is O(1)
+2)TreeSet and SortedSet is O(log M) for each add due to the sorted insertion each time
+HashSet and UnsortedSet is O(1) for average for each add
+3) Hashset: No specific order when printing - kind of random
+TreeSet: prints elements in ascending order because it mantains sorted order
+
+
+ *  CS314 Students, why is it unwise to implement all three of the
  * intersection, union, and difference methods in the AbstractSet class:
  * It would be unwise to implement all three of the intersection, union, and difference methods
  * in the AbstractSet class because the implementation of these methods can vary depending on the
  *  specific type of set. Rather we can take advantage of the SortedSet's sorted nature in its
  * own implementation of these method to make them more efficient and optimized.
+ *
+ * You can't do all three (intersection, union, and difference) directly in abstract set because
+ * each type of set type like HashSet and SortedSet has unique ways of how these would work.
+ * For example, a SortedSet keeps the elements in order which allows intersection union
+ *  more efficently by taking advantage of the sorted structure.
+ *  Meanwhile a hashset  just quickly finds data or delete elements without worrying about
+ *  the order.  By letting HashSet and SortedSet implement their own versions, we ensure that each
+ * set is optimized for its specific use case.
  */
 
 public class SetTester {
@@ -117,11 +167,11 @@ public class SetTester {
         int removeNum = 3;
         actual = absSet1.remove(removeNum);
         if (actual == expected) {
-            System.out.println("Passed test 7: AbstractSet remove\t"+absSet3.toString()+"  remove" +
-                    " "+removeNum+" --> "+absSet1.toString());
+            System.out.println("Passed test 7: AbstractSet remove\t" + absSet3 + "  remove" +
+                    " " + removeNum + " --> " + absSet1);
         } else {
             System.out.println("Failed test 7: AbstractSet remove\tExpected: " + expected + "\tActual: " + actual);
-            System.out.println(absSet3.toString()+"  remove "+removeNum+" --> "+absSet1.toString());
+            System.out.println(absSet3 + "  remove " + removeNum + " --> " + absSet1);
         }
 
         expected = false;
@@ -138,7 +188,7 @@ public class SetTester {
         if (absSet1.toString().equals("()")) {
             System.out.println("Passed test 9: AbstractSet clear");
         } else {
-            System.out.println("Failed test 9: AbstractSet clear\tExpected: ()\tActual: " + absSet1.toString());
+            System.out.println("Failed test 9: AbstractSet clear\tExpected: ()\tActual: " + absSet1);
         }
 
         // AbstractSet size
@@ -158,28 +208,28 @@ public class SetTester {
         if (absSet3.toString().equals("(1, 2, 3, 4)")) {
             System.out.println("Passed test 12: AbstractSet toString");
         } else {
-            System.out.println("Failed test 12: AbstractSet toString\tExpected: (1, 2, 3, 4)\tActual: " + absSet3.toString());
+            System.out.println("Failed test 12: AbstractSet toString\tExpected: (1, 2, 3, 4)\tActual: " + absSet3);
         }
 
         //AbstractSet union
-        System.out.println("absSet1: "+absSet1.toString()+"\nabsSet3: "+absSet3.toString());
+        System.out.println("absSet1: " + absSet1 + "\nabsSet3: " + absSet3);
         AbstractSet<Integer> expectedRes = (AbstractSet<Integer>) absSet1.union(absSet3);
         if (expectedRes.toString().equals("(1, 2, 3, 4)")) {
             System.out.println("Passed test 13: AbstractSet union");
         } else {
-            System.out.println("Failed test 13: AbstractSet union\tExpected: ()\tActual: " + expectedRes.toString());
+            System.out.println("Failed test 13: AbstractSet union\tExpected: ()\tActual: " + expectedRes);
         }
 
         absSet1.add(1);
         absSet1.add(3);
         absSet1.add(5);
         absSet1.add(7);
-        System.out.println("absSet1: "+absSet1.toString()+"\nabsSet3: "+absSet3.toString());
+        System.out.println("absSet1: " + absSet1 + "\nabsSet3: " + absSet3);
         expectedRes = (AbstractSet<Integer>) absSet1.union(absSet3);
         if (expectedRes.toString().equals("(1, 2, 3, 4, 5, 7)")) {
             System.out.println("Passed test 14: AbstractSet union");
         } else {
-            System.out.println("Failed test 14: AbstractSet union\tExpected: (1, 3)\tActual: " + expectedRes.toString());
+            System.out.println("Failed test 14: AbstractSet union\tExpected: (1, 3)\tActual: " + expectedRes);
         }
 
         System.out.println("-----------------------------------------------------");
@@ -207,7 +257,7 @@ public class SetTester {
         if (unsortedExpected.equals(unsortedSet1)) {
             System.out.println("Passed test 16: UnsortedSet addAll");
         } else {
-            System.out.println("Failed test 16: UnsortedSet addAll\tExpected: (1, 2, 3)\tActual: " + unsortedSet1.toString());
+            System.out.println("Failed test 16: UnsortedSet addAll\tExpected: (1, 2, 3)\tActual: " + unsortedSet1);
         }
 
         //UnsortedSet size
@@ -250,14 +300,16 @@ public class SetTester {
         //UnsortedSet iterator
         Iterator<Integer> it = unsortedSet1.iterator();
         ArrayList<Integer> list = new ArrayList<>();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             list.add(it.next());
         }
         if (list.toString().equals("[0, 1, 2, 3]")) {
             System.out.println("Passed test 20: UnsortedSet iterator");
         } else {
-            System.out.println("Failed test 20: UnsortedSet iterator\tExpected: [0, 1, 2, 3]\tActual: " + list.toString());
+            System.out.println("Failed test 20: UnsortedSet iterator\tExpected: [0, 1, 2, 3]\tActual: " + list);
         }
+
+        System.out.println("-----------------------------------------------------");
 
         //SortedSet methods
         ISet<String> sortedSet1 = new SortedSet<>();
@@ -270,15 +322,15 @@ public class SetTester {
         if (sortedSet1.equals(sortedSet3)) {
             System.out.println("Passed test 21: SortedSet copy constructor");
         } else {
-            System.out.println("Failed test 21: SortedSet copy constructor\tExpected: (A, B, C)\tActual: " + sortedSet3.toString());
+            System.out.println("Failed test 21: SortedSet copy constructor\tExpected: (A, B, C)\tActual: " + sortedSet3);
         }
 
-       // SortedSet add
+        // SortedSet add
         sortedSet1.add("D");
         if (sortedSet1.toString().equals("(A, B, C, D)")) {
             System.out.println("Passed test 22: SortedSet add");
         } else {
-            System.out.println("Failed test 22: SortedSet add\tExpected: true\tActual: " + sortedSet1.toString());
+            System.out.println("Failed test 22: SortedSet add\tExpected: true\tActual: " + sortedSet1);
         }
 
         //SortedSet addAll
@@ -288,12 +340,110 @@ public class SetTester {
         if (sortedSet1.toString().equals("(A, B, C, D, E, F)")) {
             System.out.println("Passed test 23: SortedSet addAll");
         } else {
-            System.out.println("Failed test 23: SortedSet addAll\tExpected: (A, B, C, D, E, F)\tActual: " + sortedSet1.toString());
+            System.out.println("Failed test 23: SortedSet addAll\tExpected: (A, B, C, D, E, F)\tActual: " + sortedSet1);
         }
 
+        //contains
+        if (sortedSet1.contains("F")) {
+            System.out.println("Passed test 24: SortedSet contains");
+        } else {
+            System.out.println("Failed test 24: SortedSet contains\tExpected: true\tActual: " + sortedSet1.contains("F"));
+        }
 
+        if (!sortedSet1.contains("G")) {
+            System.out.println("Passed test 25: SortedSet contains");
+        } else {
+            System.out.println("Failed test 25: SortedSet contains\tExpected: false\tActual: " + sortedSet1.contains("G"));
+        }
 
+        //SortedSet containsAll
+        if (sortedSet1.containsAll(sortedSet2)) {
+            System.out.println("Passed test 26: SortedSet containsAll");
+        } else {
+            System.out.println("Failed test 26: SortedSet containsAll\tExpected: true\tActual: " + sortedSet1.containsAll(sortedSet2));
+        }
 
+        //SortedSet equals
+        if (!sortedSet1.equals(sortedSet2)) {
+            System.out.println("Passed test 27: SortedSet equals");
+        } else {
+            System.out.println("Failed test 27: SortedSet equals\tExpected: false\tActual: " + sortedSet1.equals(sortedSet2));
+        }
+
+        sortedSet1.clear();
+        sortedSet1.add("E");
+        sortedSet1.add("F");
+        sortedSet2.add("E");
+        sortedSet2.add("F");
+        if (sortedSet1.equals(sortedSet2)) {
+            System.out.println("Passed test 28: SortedSet equals");
+        } else {
+            System.out.println("Failed test 28: SortedSet equals\tExpected: true\tActual: " + sortedSet1.equals(sortedSet2));
+        }
+
+        //sortedSet difference
+        sortedSet1.clear();
+        sortedSet2.clear();
+        sortedSet1.add("A");
+        sortedSet1.add("B");
+        sortedSet1.add("C");
+        sortedSet1.add("D");
+        sortedSet2.add("C");
+        sortedSet2.add("D");
+        sortedSet2.add("E");
+        sortedSet2.add("F");
+        if (sortedSet1.difference(sortedSet2).toString().equals("(A, B)")) {
+            System.out.println("Passed test 29: SortedSet difference");
+        } else {
+            System.out.println("Failed test 29: SortedSet difference\tExpected: (A, B)\tActual: " + sortedSet1.difference(sortedSet2).toString());
+        }
+
+        //sortedSet intersection
+        if (sortedSet1.intersection(sortedSet2).toString().equals("(C, D)")) {
+            System.out.println("Passed test 30: SortedSet intersection");
+        } else {
+            System.out.println("Failed test 30: SortedSet intersection\tExpected: (C, D)\tActual: " + sortedSet1.intersection(sortedSet2).toString());
+        }
+
+        //sortedSet union
+        if (sortedSet1.union(sortedSet2).toString().equals("(A, B, C, D, E, F)")) {
+            System.out.println("Passed test 31: SortedSet union");
+        } else {
+            System.out.println("Failed test 31: SortedSet union\tExpected: (A, B, C, D, E, F)\tActual: " + sortedSet1.union(sortedSet2).toString());
+        }
+
+        //SortedSet size
+        if (sortedSet1.size() == 4) {
+            System.out.println("Passed test 32: SortedSet size");
+        } else {
+            System.out.println("Failed test 32: SortedSet size\tExpected: 4\tActual: " + sortedSet1.size());
+        }
+
+        //SortedSet iterator
+        Iterator<String> it2 = sortedSet1.iterator();
+        ArrayList<String> list2 = new ArrayList<>();
+        while (it2.hasNext()) {
+            list2.add(it2.next());
+        }
+        if (list2.toString().equals("[A, B, C, D]")) {
+            System.out.println("Passed test 33: SortedSet iterator");
+        } else {
+            System.out.println("Failed test 33: SortedSet iterator\tExpected: [A, B, C, D]\tActual: " + list2);
+        }
+
+        //SortedSet min
+        if (((SortedSet<String>) sortedSet1).min().equals("A")) {
+            System.out.println("Passed test 34: SortedSet min");
+        } else {
+            System.out.println("Failed test 34: SortedSet min\tExpected: A\tActual: " + ((SortedSet<String>) sortedSet1).min());
+        }
+
+        //sortedSet max
+        if (((SortedSet<String>) sortedSet1).max().equals("D")) {
+            System.out.println("Passed test 35: SortedSet max");
+        } else {
+            System.out.println("Failed test 35: SortedSet max\tExpected: D\tActual: " + ((SortedSet<String>) sortedSet1).max());
+        }
 
 
 //        unsortedSet1.add(2);
@@ -314,11 +464,6 @@ public class SetTester {
 //            System.out.println("Failed test 16: UnsortedSet union\tExpected: (1, 2, 3, 4)" +
 //                    "\tActual: " + unsortedSet1.union(unsortedSet2).toString());
 //        }
-
-
-
-
-
 
 
         // CS314 Students. Uncomment this section when ready to
@@ -342,7 +487,7 @@ public class SetTester {
 
     // print out results of test
     private static <E> void showTestResults(boolean actualResult, boolean expectedResult,
-            int testNumber, ISet<E> set1, ISet<E> set2, String testDescription) {
+                                            int testNumber, ISet<E> set1, ISet<E> set2, String testDescription) {
         if (actualResult == expectedResult) {
             System.out.println("Passed test " + testNumber);
         } else {
@@ -405,7 +550,7 @@ public class SetTester {
      * Sets.
      */
     private static void processTextJavaSets(Set<String> set, String text,
-            Scanner keyboard) {
+                                            Scanner keyboard) {
         Stopwatch s = new Stopwatch();
         Scanner sc = new Scanner(text);
         int totalWords = 0;
@@ -424,7 +569,7 @@ public class SetTester {
      * Show results of add words to given set.
      */
     private static <E> void showResultsAndWords(Iterable<E> set, Stopwatch s, int totalWords,
-            int setSize, Scanner keyboard) {
+                                                int setSize, Scanner keyboard) {
 
         System.out.println("Time to add the elements in the text to this set: " + s.toString());
         System.out.println("Total number of words in text including duplicates: " + totalWords);

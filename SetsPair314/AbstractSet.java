@@ -1,12 +1,12 @@
 /*  Student information for assignment:
  *
- *  On OUR honor, Vedant Athale and Shruthik Alle,
+ *  On OUR honor, Vedant Athale and Srishruthik Alle,
  *  this programming assignment is OUR own work
  *  and WE have not provided this code to any other student.
  *
  *  Number of slip days used:
  *
- *  Student 1 (Student whose Canvas account is being used)
+ *  Student 1 (Student whose turnin account is being used)
  *  UTEID: vba252
  *  email address: vedant.athale@gmail.com
  *  Grader name:
@@ -26,22 +26,6 @@ import java.util.Iterator;
  * method and the other methods.
  */
 public abstract class AbstractSet<E> implements ISet<E> {
-
-    /* DELETE THIS COMMENT FROM YOUR SUBMISSION.
-     *
-     * RECALL:
-     *
-     * NO INSTANCE VARIABLES ALLOWED.
-     *
-     * NO DIRECT REFERENCE TO UnsortedSet OR SortedSet ALLOWED.
-     * (In other words the data types UnsortedSet and SortedSet
-     * will not appear any where in this class.)
-     *
-     * NO DIRECT REFERENCES to ArrayList or other Java Collections.
-     *
-     * NO METHODS ADDED other than those in ISet and Object.
-     */
-
 
     /**
      * Return a String version of this set.
@@ -177,25 +161,13 @@ public abstract class AbstractSet<E> implements ISet<E> {
         return count;
     }
 
-//    /**
-//     * Create a new set that is the intersection of this set and otherSet. (elements in both sets)
-//     * Time Complexity: O(N^2)
-//     *
-//     * @param otherSet != null
-//     * @return a new set that is the intersection of this set and otherSet.
-//     */
-//    @Override
-//    public ISet<E> intersection(ISet<E> otherSet) {
-//        if (otherSet == null) {
-//            throw new IllegalArgumentException("otherSet cannot be null");
-//        }
-//        for (E val : this) {
-//            if (!otherSet.contains(val)) {
-//                this.remove(val);
-//            }
-//        }
-//        return this;
-//    }
+    /**
+     * Create a new set that is the union of this set and otherSet. (elements in either sets)
+     * Time Complexity: O(N^2)
+     *
+     * @param other != null
+     * @return a new set that is the union of this set and otherSet.
+     */
     public ISet<E> union(ISet<E> other) {
         if (other == null) {
             throw new IllegalArgumentException("otherSet cannot be null");

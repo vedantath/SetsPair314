@@ -1,12 +1,12 @@
 /*  Student information for assignment:
  *
- *  On OUR honor, Vedant Athale and Shruthik Alle,
+ *  On OUR honor, Vedant Athale and Srishruthik Alle,
  *  this programming assignment is OUR own work
  *  and WE have not provided this code to any other student.
  *
  *  Number of slip days used:
  *
- *  Student 1 (Student whose Canvas account is being used)
+ *  Student 1 (Student whose turnin account is being used)
  *  UTEID: vba252
  *  email address: vedant.athale@gmail.com
  *  Grader name:
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class UnsortedSet<E> extends AbstractSet<E> {
 
     // Instance variable
-    private final ArrayList<E> myCon;
+    private ArrayList<E> myCon;
 
     // UnsortedSet Constructor: Creates an empty UnsortedSet
     public UnsortedSet() {

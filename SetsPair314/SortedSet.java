@@ -1,12 +1,12 @@
 /*  Student information for assignment:
  *
- *  On OUR honor, Vedant Athale and Shruthik Alle,
+ *  On OUR honor, Vedant Athale and Srishruthik Alle,
  *  this programming assignment is OUR own work
  *  and WE have not provided this code to any other student.
  *
  *  Number of slip days used:
  *
- *  Student 1 (Student whose Canvas account is being used)
+ *  Student 1 (Student whose turnin account is being used)
  *  UTEID: vba252
  *  email address: vedant.athale@gmail.com
  *  Grader name:
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     // Instance variable
-    private final ArrayList<E> myCon;
+    private ArrayList<E> myCon;
 
     /**
      * create an empty SortedSet
@@ -116,6 +116,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     /**
      * Merge two sub-SortedSets into a single sorted set.
+     *
      * @param set1 the first sorted set to be merged
      * @param set2 the second sorted set to be merged
      * @return a new ISet that contains all the elements of set1 and set2 and sorted
@@ -158,8 +159,33 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         return resultSet;
     }
 
+    private ArrayList<E> merge(ArrayList<E> listA, ArrayList<E> listB) {
+        ArrayList<E> res = new ArrayList<>();
+        int left = 0; //left pointer index
+        int right = 0; //right pointer index
+        while (left < listA.size() && right < listB.size()) {
+            if (listA.get(left).compareTo(listB.get(right)) <= 0) {
+                res.add(listA.get(left));
+                left++;
+            } else {
+                res.add(listA.get(right));
+                right++;
+            }
+        }
+        while (left < listA.size()) {
+            res.add(listA.get(left));
+            left++;
+        }
+        while (right < listB.size()) {
+            res.add(listB.get(right));
+            right++;
+        }
+        return res;
+    }
+
     /**
      * Create a new set that is the intersection of setA and setB.
+     *
      * @param setA the first sorted set to be intersected
      * @param setB the second sorted set to be intersected
      * @return a new ISet that contains all the elements that are in both setA and setB
@@ -193,6 +219,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     /**
      * Create a new set that is the difference of setA and setB. A-B (elements in A, but not in B)
+     *
      * @param setA
      * @param setB
      * @return a new ISet that contains all the elements that are in setA but not in setB
@@ -291,11 +318,11 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         // If otherSet is a SortedSet, use merge method --> O(N)
         if (otherSet instanceof SortedSet) {
             if (!this.equals(otherSet)) {
+                SortedSet<E> other = (SortedSet<E>) otherSet;
+                if (otherSet.size() > 0) {
+                    this.myCon = merge(this.myCon, other.myCon);
+                }
                 setChanged = true;
-            }
-            SortedSet<E> other = (SortedSet<E>) otherSet;
-            if (otherSet.size() > 0) {
-                merge(this.myCon, other.myCon, 0, 0, other.size() - 1);
             }
         }
         // If otherSet is not SortedSet, add elements one by one then perform mergeSort --> O(N^2)

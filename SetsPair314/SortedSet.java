@@ -4,7 +4,7 @@
  *  this programming assignment is OUR own work
  *  and WE have not provided this code to any other student.
  *
- *  Number of slip days used:
+ *  Number of slip days used: 0
  *
  *  Student 1 (Student whose turnin account is being used)
  *  UTEID: vba252
@@ -116,6 +116,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     /**
      * Merge two sub-SortedSets into a single sorted set.
+     * Time Complexity: O(N)
      *
      * @param set1 the first sorted set to be merged
      * @param set2 the second sorted set to be merged
@@ -159,6 +160,14 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         return resultSet;
     }
 
+    /**
+     * Merge two sub-ArrayLists into a single sorted ArrayList
+     * Time Complexity: O(N)
+     *
+     * @param listA the first sorted list to be merged
+     * @param listB the second sorted list to be merged
+     * @return a new ArrayList that contains all the elements of listA and listB and sorted
+     */
     private ArrayList<E> merge(ArrayList<E> listA, ArrayList<E> listB) {
         ArrayList<E> res = new ArrayList<>();
         int left = 0; //left pointer index
@@ -185,6 +194,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     /**
      * Create a new set that is the intersection of setA and setB.
+     * Time Complexity: O(N)
      *
      * @param setA the first sorted set to be intersected
      * @param setB the second sorted set to be intersected
@@ -219,6 +229,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
 
     /**
      * Create a new set that is the difference of setA and setB. A-B (elements in A, but not in B)
+     * Time Complexity: O(N)
      *
      * @param setA
      * @param setB
@@ -380,6 +391,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
      * Time Complexity: O(N) if other is a SortedSet, O(N^2) otherwise
      *
      * @param other the object to compare to this set
+     * @return true if this set is equal to other, false otherwise.
      */
     public boolean equals(Object other) {
         if (other == null || !(other instanceof ISet<?> otherSet)) {
@@ -471,7 +483,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             other = (SortedSet<E>) otherSet;
         }
         ISet<E> result = new SortedSet<>();
-        result = mergeSets(this, (SortedSet<E>) otherSet);
+        result = mergeSets(this, other);
         return result;
     }
 
@@ -491,6 +503,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Return the smallest element in this SortedSet.
      * <br> pre: size() != 0
+     * Time Complexity: O(1)
      *
      * @return the smallest element in this SortedSet.
      */
@@ -504,6 +517,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     /**
      * Return the largest element in this SortedSet.
      * <br> pre: size() != 0
+     * Time Complexity: O(1)
      *
      * @return the largest element in this SortedSet.
      */

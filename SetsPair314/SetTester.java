@@ -4,7 +4,7 @@
  *  this programming assignment is OUR own work
  *  and WE have not provided this code to any other student.
  *
- *  Number of slip days used:
+ *  Number of slip days used: 0
  *
  *  Student 1 (Student whose turnin account is being used)
  *  UTEID: vba252
@@ -27,7 +27,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 
 /*
  * CS 314 Students, put your results to the experiments and answers to questions
@@ -93,6 +94,7 @@ public class SetTester {
 
     public static void main(String[] args) {
 
+        //Student test cases
         //AbstractSet methods test cases
         AbstractSet<Integer> absSet1 = new UnsortedSet<>();
         AbstractSet<Integer> absSet2 = new UnsortedSet<>();
@@ -444,26 +446,6 @@ public class SetTester {
         } else {
             System.out.println("Failed test 35: SortedSet max\tExpected: D\tActual: " + ((SortedSet<String>) sortedSet1).max());
         }
-
-
-//        unsortedSet1.add(2);
-//        unsortedSet1.add(3);
-//
-//        unsortedSet2.add(3);
-//        unsortedSet2.add(4);
-//        unsortedSet2.add(5);
-//        ISet<Integer> unsortedRes = new UnsortedSet<>();
-//        unsortedRes.add(1);
-//        unsortedRes.add(2);
-//        unsortedRes.add(3);
-//        unsortedRes.add(4);
-//        unsortedRes.add(5);
-//        if (unsortedRes.equals(unsortedSet1.union(unsortedSet2))) {
-//            System.out.println("Passed test 16: UnsortedSet union");
-//        } else {
-//            System.out.println("Failed test 16: UnsortedSet union\tExpected: (1, 2, 3, 4)" +
-//                    "\tActual: " + unsortedSet1.union(unsortedSet2).toString());
-//        }
 
 
         // CS314 Students. Uncomment this section when ready to

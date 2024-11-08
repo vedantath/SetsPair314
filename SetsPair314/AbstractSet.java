@@ -114,9 +114,10 @@ public abstract class AbstractSet<E> implements ISet<E> {
      */
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof ISet<?> otherSet)) {
+        if (!(other instanceof ISet<?>)) {
             return false;
         }
+        ISet<?> otherSet = (ISet<?>) other;
         if (this.size() != otherSet.size()) {
             return false;
         }

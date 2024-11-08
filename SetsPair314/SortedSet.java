@@ -372,7 +372,8 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (otherSet == null) {
             throw new IllegalArgumentException("otherSet cannot be null");
         }
-        if (otherSet instanceof SortedSet<E> o) {
+        if (otherSet instanceof SortedSet) {
+            SortedSet<E> o = (SortedSet<E>) otherSet;
             int index = this.myCon.size() - 1;
             while (index >= 0 && o.size() > 0) {
                 if (myCon.get(index).compareTo(o.myCon.get(o.size() - 1)) == 0) {
@@ -394,9 +395,10 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
      * @return true if this set is equal to other, false otherwise.
      */
     public boolean equals(Object other) {
-        if (other == null || !(other instanceof ISet<?> otherSet)) {
+        if (other == null || !(other instanceof ISet<?>)) {
             return false;
         }
+        ISet<?> otherSet = (ISet<?>) other;
         if (other == this) {
             return true;
         }
